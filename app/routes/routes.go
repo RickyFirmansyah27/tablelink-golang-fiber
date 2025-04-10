@@ -27,14 +27,12 @@ func Register(app *gin.Engine) {
 type BaseResponse struct {
 	Success bool        `json:"success"`
 	Message string      `json:"message"`
-	Data    interface{} `json:"data,omitempty"`
 	Error   interface{} `json:"error,omitempty"`
 }
 
 func ErrRouter(c *gin.Context) {
 	c.JSON(http.StatusOK, BaseResponse{
 		Success: true,
-		Message: message,
-		Data:    data,
+		Message: "No Route Found",
 	})
 }
