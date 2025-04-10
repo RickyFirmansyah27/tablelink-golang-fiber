@@ -10,7 +10,7 @@ import (
 )
 
 func Register(app *gin.Engine) {
-	app.NoRoute(ErrRouter)
+	app.NoRoute(NoRouteAccess)
 
 	app.GET("/", func(ctx *gin.Context) {
         helpers.Success(ctx, "Welcome to Go Vercel", nil)
@@ -24,8 +24,6 @@ func Register(app *gin.Engine) {
 	}
 }
 
-func ErrRouter(c *gin.Context) {
-	c.JSON(http.StatusBadRequest, gin.H{
-		"errors": "this page could not be found",
-	})
+func NoRouteAccess(c *gin.Context) {
+	helpers.NotFound(c, "No Route Found")
 }
