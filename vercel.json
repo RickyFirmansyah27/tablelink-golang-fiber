@@ -1,12 +1,10 @@
 {
-    "github": {
-      "silent": true
-    },
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/api/vercel.go"
-      }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "./index.go",
+      "use": "@vercel/go"
+    }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "/" }]
 }
-  
