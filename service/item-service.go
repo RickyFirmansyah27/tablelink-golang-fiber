@@ -22,8 +22,8 @@ func GetItems(c *fiber.Ctx) (int, []models.Item, error) {
 		item := models.Item{
 			UUID:   itemMap["uuid"].(string),
 			Name:   itemMap["name"].(string),
-			Price:  itemMap["name"].(int),
-			Status:  itemMap["name"].(string),
+			Price:  itemMap["price"].(string),
+			Status:  itemMap["status"].(string),
 		}
 		items = append(items, item)
 	}
