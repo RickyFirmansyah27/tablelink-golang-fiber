@@ -171,7 +171,7 @@ func UpdateItemByUUID(uuid string,  item models.Item) error {
 }
 
 func DeleteItemByUUID(uuid string) error {
-	query := `UPDATE tm_item SET is_deleted = TRUE WHERE uuid = $1`
+	query := `Delete from tm_item WHERE uuid = $1`
 
 	_, err := ExecuteSQLWithParams(query, uuid)
 	if err != nil {
