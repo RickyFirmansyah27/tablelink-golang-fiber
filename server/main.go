@@ -19,7 +19,6 @@ func main() {
 	app := fiber.New()
 
 	routes.RootRoute(app)
-	routes.V1Route(app)
 
 	port := os.Getenv("PORT")
 	if port == "" {
