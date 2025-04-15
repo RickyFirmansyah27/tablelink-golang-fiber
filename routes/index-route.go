@@ -12,4 +12,10 @@ func RootRoute(app *fiber.App) {
 	app.Post("/items", handlers.CreateItem)
 	app.Put("/items", handlers.UpdateItem)
 	app.Delete("/items/:uuid", handlers.DeleteItem)
+
+	// Ingredient
+	app.Get("/ingredient", handlers.GetIngredient)
+	app.Post("/ingredient", handlers.CreateIngredient)
+	app.Put("/ingredient", handlers.UpdateIngredient)
+	app.Delete("/ingredient/:uuid", handlers.DeleteIngredient)
 }
