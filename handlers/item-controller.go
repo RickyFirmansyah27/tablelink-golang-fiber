@@ -50,31 +50,19 @@ func CreateItem(c *fiber.Ctx) error {
 }
 
 func UpdateItem(c *fiber.Ctx) error {
-    uuid := c.Params("uuid")
-    if uuid == "" {
-        return helpers.Error(c, 400, "UUID is required", nil)
-    }
+	var input models.Item
+	if err := c.BodyParser(&input); err != nil {
+		log.Printf("[ItemsController] - Error parsing request body: %v", err)
+		return helpers.Error(c, 400, "Invalid request body", err)
+	}
 
-    var input struct {
-        Name   string `json:"name"`
-        Price  int    `json:"price"`
-        Status string `json:"status"`
-    }
+	item, err := service.UpdateItem(input)
+	if err != nil {
+		log.Printf("[ItemsController] - Failed to udpated item: %v", err)
+		return helpers.Error(c, 500, "Failed to udpated item", err)
+	}
 
-    itemInput := models.Item{
-        Name:   input.Name,
-        Price:  input.Price,
-        Status: input.Status,
-    }
-
-    err := service.UpdateItem(uuid, itemInput)
-    if err != nil {
-        log.Printf("[ItemsController] - Error updating item: %v", err)
-        return helpers.Error(c, 500, "Failed to update item", err)
-    }
-
-    log.Printf("[ItemsController] - Successfully updated item with UUID: %s", uuid)
-    return helpers.Success(c, "Item successfully updated", itemInput)
+	return helpers.Success(c, "Item successfully udpated", item)
 }
 
 func DeleteItem(c *fiber.Ctx) error {

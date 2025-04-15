@@ -150,16 +150,16 @@ func CreateItem(item models.Item) error {
 }
 
 
-func UpdateItemByUUID(uuid string,  item models.Item) error {
+func UpdateItemByUUID(item models.Item) error {
 	query := `UPDATE tm_item 
 		SET name = $1, price = $2, status = $3
-		WHERE uuid = $5`
+		WHERE uuid = $4`
 
 	queryParams := []interface{}{
 		item.Name,
 		item.Price,
 		item.Status,
-		uuid,
+		item.UUID,
 	}
 
 	_, err := ExecuteSQLWithParams(query, queryParams...)

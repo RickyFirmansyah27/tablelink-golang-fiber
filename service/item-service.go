@@ -65,17 +65,18 @@ func CreateItem(input models.Item) (models.Item, error) {
 	return item, nil
 }
 
-func UpdateItem(uuid string, item models.Item) error {
-	log.Printf("[ItemsService] - Updating item with UUID: %s", uuid)
 
-	err := config.UpdateItemByUUID(uuid, item)
+func UpdateItem(item models.Item) (*models.Item, error) {
+	log.Printf("[ItemsService] - Updating item with UUID: %s", item.UUID)
+
+	err := config.UpdateItemByUUID(item)
 	if err != nil {
-		log.Printf("[ItemsService] - Failed to update item with UUID: %s, error: %v", uuid, err)
-		return err
+		log.Printf("[ItemsService] - Failed to update item: %s, error: %v", err)
+		return nil, err
 	}
 
-	log.Printf("[ItemsService] - Successfully updated item with UUID: %s", uuid)
-	return nil
+	log.Printf("[ItemsService] - Successfully updated item")
+	return &item, nil
 }
 
 func DeleteItemByUUID(uuid string) error {

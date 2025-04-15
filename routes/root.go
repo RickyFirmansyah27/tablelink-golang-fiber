@@ -10,6 +10,6 @@ func RootRoute(app *fiber.App) {
 	app.Get("/", handlers.RootHandler)
 	app.Get("/items", handlers.GetItems)
 	app.Post("/items", handlers.CreateItem)
-	app.Put("/items/:uuid", handlers.UpdateItem)
+	app.Put("/items", handlers.UpdateItem)
 	app.Delete("/items/:uuid", handlers.DeleteItem)
 }
