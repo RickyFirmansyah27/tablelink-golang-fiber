@@ -2,6 +2,7 @@ package main
 
 import (
 	"go-fiber-vercel/routes"
+	"go-fiber-vercel/config"
 	"log"
 	"os"
 
@@ -10,11 +11,15 @@ import (
 
 func main() {
 
+	err := config.DBConnection()
+	if err != nil {
+		log.Fatal("Database connection failed: ", err)
+	}
+
 	app := fiber.New()
 
 	routes.RootRoute(app)
 	routes.V1Route(app)
-	routes.V2Route(app)
 
 	port := os.Getenv("PORT")
 	if port == "" {
